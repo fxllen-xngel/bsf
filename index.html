@@ -37,10 +37,11 @@
   }
 
   p {
-    font-size: 1.15em;
-    line-height: 1.9;
-    margin: 30px 0;
-  }
+  font-size: 1.15em;
+  line-height: 1.9;
+  margin: 30px 0;
+  text-shadow: 0 0 8px rgba(255,255,255,0.05);
+}
 
   .divider {
     margin: 60px 0;
@@ -50,12 +51,16 @@
 
   /* Floating words */
   .floating-word {
-    position: fixed;
-    color: rgba(255,255,255,0.08);
-    font-size: 2em;
-    pointer-events: none;
-    animation: float 20s linear infinite;
-  }
+  position: fixed;
+  color: rgba(255, 255, 255, 0.18);
+  font-size: 2em;
+  pointer-events: none;
+  animation: float 18s linear infinite;
+  z-index: 1;
+  filter: blur(0.5px);
+  font-style: italic;
+  letter-spacing: 1px;
+}
 
   @keyframes float {
     from {
@@ -75,7 +80,7 @@
 
 <div class="container">
 
-  <h1>for you</h1>
+  <h1>For you my sweet Mrunmayee</h1>
 
   <p>
     There are certain people one encounters in life who do not merely arrive, but rather
@@ -128,31 +133,35 @@
 
 <script>
   const words = [
-    "always",
-    "home",
-    "us",
-    "laughter",
-    "quiet",
-    "infinitee",
-    "you",
-    "again",
-    "softness"
-  ];
+  "stay",
+  "known",
+  "gentle",
+  "alwayss",
+  "home",
+  "us",
+  "quiet",
+  "infinitee",
+  "softly",
+  "again",
+  "still",
+  "you"
+];
 
   function createWord() {
-    const word = document.createElement("div");
-    word.classList.add("floating-word");
-    word.innerText = words[Math.floor(Math.random() * words.length)];
+  const word = document.createElement("div");
+  word.classList.add("floating-word");
+  word.innerText = words[Math.floor(Math.random() * words.length)];
 
-    word.style.left = Math.random() * 100 + "vw";
-    word.style.fontSize = (Math.random() * 20 + 20) + "px";
+  word.style.left = Math.random() * 90 + "vw";
+  word.style.top = "100vh";
+  word.style.fontSize = (Math.random() * 25 + 18) + "px";
 
-    document.body.appendChild(word);
+  document.body.appendChild(word);
 
-    setTimeout(() => {
-      word.remove();
-    }, 20000);
-  }
+  setTimeout(() => {
+    word.remove();
+  }, 18000);
+}
 
   setInterval(createWord, 1500);
 </script>
