@@ -8,45 +8,65 @@
   body {
     margin: 0;
     font-family: "Georgia", serif;
-    background: #0e0e0e;
     color: #f5f5f5;
-    line-height: 1.8;
+    overflow-x: hidden;
+    background: linear-gradient(-45deg, #1a1a2e, #16213e, #0f3460, #1a1a2e);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+  }
+
+  @keyframes gradientShift {
+    0% {background-position: 0% 50%;}
+    50% {background-position: 100% 50%;}
+    100% {background-position: 0% 50%;}
   }
 
   .container {
     max-width: 800px;
     margin: auto;
-    padding: 60px 20px;
-    text-align: center;
+    padding: 80px 20px;
+    position: relative;
+    z-index: 2;
   }
 
   h1 {
+    text-align: center;
     font-weight: normal;
     letter-spacing: 2px;
-    margin-bottom: 40px;
-  }
-
-  .image {
-    margin: 30px 0;
-  }
-
-  img {
-    width: 100%;
-    max-height: 400px;
-    object-fit: cover;
-    border-radius: 10px;
+    margin-bottom: 50px;
   }
 
   p {
-    font-size: 1.1em;
-    margin: 25px 0;
-    text-align: left;
+    font-size: 1.15em;
+    line-height: 1.9;
+    margin: 30px 0;
   }
 
   .divider {
-    margin: 50px 0;
+    margin: 60px 0;
     height: 1px;
     background: rgba(255,255,255,0.2);
+  }
+
+  /* Floating words */
+  .floating-word {
+    position: fixed;
+    color: rgba(255,255,255,0.08);
+    font-size: 2em;
+    pointer-events: none;
+    animation: float 20s linear infinite;
+  }
+
+  @keyframes float {
+    from {
+      transform: translateY(100vh);
+      opacity: 0;
+    }
+    20% { opacity: 1; }
+    to {
+      transform: translateY(-10vh);
+      opacity: 0;
+    }
   }
 </style>
 </head>
@@ -57,59 +77,47 @@
 
   <h1>for you</h1>
 
-  <div class="image">
-    <img src="image1.jpg" alt="memory one">
-  </div>
-
   <p>
     There are certain people one encounters in life who do not merely arrive, but rather
-    settle—quietly, irrevocably—into the architecture of one’s existence.
+    settle quietly, irreversably into the architecture of one’s existence.
     You are, without exaggeration, one such presence.
   </p>
 
   <p>
-    I often find myself revisiting the smallest, most unassuming moments with you—
-    fragments of conversations, shared silences, laughter that lingered a little longer
-    than it needed to—yet somehow, those are the very moments that feel the most
+    I often find myself revisiting the smallest, most humble moments with you,
+    fragments of conversations, shared silences, laughter that lasted a little longer
+    than it needed to, yet somehow, those are the very moments that feel the most
     infinitee.
   </p>
 
-  <div class="image">
-    <img src="image2.jpg" alt="memory two">
-  </div>
-
   <p>
-    You have, in ways both subtle and profound, altered the cadence of my days.
-    Things feel softer, warmer, more bearable—simply because you exist within
+    You have, in ways both subtle and intense, altered the tempo of my days.
+    Things feel softer, warmer, more bearable, simply because you exist within
     the same world as I dooo.
   </p>
 
   <p>
     It is not always grand gestures that define a bond like ours, but rather the
-    quiet constancy—the unspoken understanding that no matter how chaotic
+    quiet invariability, the unspoken understanding that no matter how chaotic
     everything becomes, there remains a space where I am seen, known, and
     held in the gentlest regard.
   </p>
 
-  <div class="image">
-    <img src="image3.jpg" alt="memory three">
-  </div>
-
   <div class="divider"></div>
 
   <p>
-    If I were to articulate what you mean to me in its entirety, I suspect language
+    If I were to express what you mean to me in its entirety, I believe language
     would falter. Still, I will attempt this much:
   </p>
 
   <p>
-    You are not merely my closest companion—you are my quiet refuge,
+    You are not merely my closest companion, you are my quiet refuge,
     my unexpected joy, my most certain constant.
   </p>
 
   <p>
     And should time attempt to erode the edges of memory, I know this truth will
-    remain, unwavering and absolute—
+    remain, unwavering and absolute
   </p>
 
   <p>
@@ -117,6 +125,37 @@
   </p>
 
 </div>
+
+<script>
+  const words = [
+    "always",
+    "home",
+    "us",
+    "laughter",
+    "quiet",
+    "infinitee",
+    "you",
+    "again",
+    "softness"
+  ];
+
+  function createWord() {
+    const word = document.createElement("div");
+    word.classList.add("floating-word");
+    word.innerText = words[Math.floor(Math.random() * words.length)];
+
+    word.style.left = Math.random() * 100 + "vw";
+    word.style.fontSize = (Math.random() * 20 + 20) + "px";
+
+    document.body.appendChild(word);
+
+    setTimeout(() => {
+      word.remove();
+    }, 20000);
+  }
+
+  setInterval(createWord, 1500);
+</script>
 
 </body>
 </html>
