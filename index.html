@@ -52,14 +52,12 @@
   /* Floating words */
   .floating-word {
   position: fixed;
-  color: rgba(255, 255, 255, 0.18);
-  font-size: 2em;
+  color: rgba(255, 255, 255, 0.35); /* MUCH more visible */
   pointer-events: none;
-  animation: float 18s linear infinite;
   z-index: 1;
-  filter: blur(0.5px);
   font-style: italic;
   letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(255,255,255,0.2);
 }
 
   @keyframes float {
@@ -133,37 +131,56 @@
 
 <script>
   const words = [
-  "stay",
-  "known",
-  "gentle",
-  "alwayss",
-  "home",
-  "us",
-  "quiet",
-  "infinitee",
-  "softly",
-  "again",
-  "still",
-  "you"
-];
+    "stay",
+    "known",
+    "gentle",
+    "alwayss",
+    "home",
+    "us",
+    "quiet",
+    "infinitee",
+    "softly",
+    "again",
+    "still",
+    "you"
+  ];
 
   function createWord() {
-  const word = document.createElement("div");
-  word.classList.add("floating-word");
-  word.innerText = words[Math.floor(Math.random() * words.length)];
+    const word = document.createElement("div");
+    word.classList.add("floating-word");
+    word.innerText = words[Math.floor(Math.random() * words.length)];
 
-  word.style.left = Math.random() * 90 + "vw";
-  word.style.top = "100vh";
-  word.style.fontSize = (Math.random() * 25 + 18) + "px";
+    // RANDOM POSITION (not just bottom)
+    word.style.left = Math.random() * 100 + "vw";
+    word.style.top = Math.random() * 100 + "vh";
 
-  document.body.appendChild(word);
+    // Make sure it's visible
+    word.style.opacity = Math.random() * 0.5 + 0.3;
 
-  setTimeout(() => {
-    word.remove();
-  }, 18000);
-}
+    // Random size
+    word.style.fontSize = (Math.random() * 20 + 18) + "px";
 
-  setInterval(createWord, 1500);
+    document.body.appendChild(word);
+
+    // Fade out manually
+    setTimeout(() => {
+      word.style.transition = "opacity 2s ease";
+      word.style.opacity = "0";
+    }, 8000);
+
+    // Remove after fade
+    setTimeout(() => {
+      word.remove();
+    }, 10000);
+  }
+
+  // Spawn faster so you NOTICE them
+  setInterval(createWord, 800);
+
+  // Initial burst so page isn’t empty
+  for (let i = 0; i < 12; i++) {
+    createWord();
+  }
 </script>
 
 </body>
